@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Transaction Prediction | Banking AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --secondary: #00c6ff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #334155;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header h1 i {
+            color: #2563eb;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .main-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 750px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            padding: 35px;
+        }
+
+        .section-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 25px;
+            transition: all 0.2s ease;
+        }
+
+        .section-box:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.25);
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        /* Result Alerts */
+        .result-box {
+            margin-top: 18px;
+            padding: 16px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .result-success {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .result-danger {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .result-info {
+            background-color: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1><i class="fa-solid fa-building-columns"></i> Banking Transaction Intelligence</h1>
+        <span class="badge">Project: PRCP-1003-CustTransPred</span>
+    </div>
+
+    <div class="main-card">
+        
+        <!-- Mode 1: Quick Customer Prediction -->
+        <div class="section-box">
+            <div class="section-title">
+                <i class="fa-solid fa-user-check" style="color: #2563eb;"></i>
+                Individual Customer Transaction Check
+            </div>
+            <p class="section-desc">
+                Simulate a real-time prediction using sample data for all 200 anonymized behavioral variables.
+            </p>
+            <form action="/predict_sample" method="post">
+                <button type="submit" class="btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Sample Customer
+                </button>
+            </form>
+
+            {% if pred %}
+            <div class="result-box {% if 'WILL make' in pred %}result-success{% else %}result-danger{% endif %}">
+                <i class="fa-solid {% if 'WILL make' in pred %}fa-circle-check{% else %}fa-circle-xmark{% endif %} fa-lg"></i>
+                <span>{{ pred }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Mode 2: Batch CSV Prediction -->
+        <div class="section-box" style="margin-bottom: 0;">
+            <div class="section-title">
+                <i class="fa-solid fa-file-csv" style="color: #059669;"></i>
+                Batch Customer Prediction (CSV Upload)
+            </div>
+            <p class="section-desc">
+                Upload a test CSV containing <code>var_0</code> to <code>var_199</code> to predict bulk customer transaction activity.
+            </p>
+            <form action="/predict_csv" method="post" enctype="multipart/form-data">
+                <div class="file-upload-wrapper">
+                    <input type="file" name="file" accept=".csv" required>
+                </div>
+                <button type="submit" class="btn" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload & Run Batch
+                </button>
+            </form>
+
+            {% if pred_csv %}
+            <div class="result-box result-info">
+                <i class="fa-solid fa-chart-pie fa-lg"></i>
+                <span>{{ pred_csv }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="footer">
+        DataMites CDS Capstone Project | Machine Learning Production Service
+    </div>
+
+</body>
+</html>
